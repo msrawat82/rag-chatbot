@@ -179,6 +179,13 @@ python -m eval.retrieval_eval               # retrieval hit rate + MIN_RELEVANCE
 python -m eval.fairness_eval                # counterfactual fairness check
 ```
 
+To test at scale without real policies, generate 10 fictional 100-page GlobalOmTech policy PDFs (four different
+layouts) into `data/<category>/`:
+
+```bash
+python tools/generate_globalomtech_policies.py
+```
+
 Edit `eval/questions.json` to add questions about your own documents, each with text the answer must
 contain. Out-of-scope questions with `"expect": []` check that the bot abstains.
 

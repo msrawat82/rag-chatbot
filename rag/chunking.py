@@ -183,9 +183,20 @@ class HeadingDetector:
         self.cover_styles = {s for s, pages in style_pages.items() if pages == {1} and last_page > 1}
         candidates = [l for l in candidates if (l.size, l.bold) not in self.cover_styles]
         styles = sorted({(l.size, l.bold) for l in candidates}, key=lambda s: (-s[0], not s[1]))
-        self.font_mode = len(candidates) >= 2
+        # Font mode needs heading fonts that are actually used for headings. A single-font document
+        # with a few bold table headers has many "2.3 Title" headings but almost no font candidates:
+        # treat it as text mode so the numbered headings are used.
+        numbered = sum(1 for l in text_lines if self._numbered_heading(l.text))
+        self.font_mode = len(candidates) >= 2 and len(candidates) * 2 >= numbered
         self.style_level = {s: i + 1 for i, s in enumerate(styles[:4])}
         self.max_level = max(self.style_level.values(), default=3) if self.font_mode else 3
+
+    @staticmethod
+    def _numbered_heading(text: str) -> bool:
+        if _words(text) > 15 or text.endswith((".", ",", ";")):
+            return False
+        m = NUMBERED.match(text)
+        return bool((m and m.group(2)[:1].isupper()) or KEYWORD.match(text))
 
     def _font_heading_candidate(self, ln: Line) -> bool:
         if not ln.size or _words(ln.text) > 20 or ln.text.endswith((".", ",", ";")):

@@ -48,6 +48,20 @@ def test_text_mode_numbered_keyword_and_caps_headings():
     assert "Contact the vendor desk" in chunks[1].body
 
 
+def test_single_font_document_with_bold_table_header_uses_numbered_headings():
+    lines = [Line("Role Responsibility", 1, size=10, bold=True), Line("Owner Approves exceptions", 1, size=10)]
+    names = ["SCOPE", "PRICING", "BILLING", "SUPPORT", "EXIT"]
+    for n, name in enumerate(names, 1):
+        lines += [Line(f"Overview text for {name.lower()}.", n, size=10), Line(f"{n}. {name}", n, size=10),
+                  Line(f"{n}.1 {name.title()} rules", n, size=10),
+                  Line(f"Rules for {name.lower()} apply to everyone.", n, size=10),
+                  Line(f"Contact the {name.lower()} desk with questions.", n, size=10)]
+    lines += [Line("Level Target", 5, size=10, bold=True), Line("L1 5%", 5, size=10)]
+    chunks, stats = chunk_document(doc_from(lines, 5), "d", "Policy", "Client Policies")
+    assert stats.mode == "text"
+    assert "2. PRICING > 2.1 Pricing rules" in paths(chunks)
+
+
 def test_running_headers_footers_and_page_numbers_removed():
     lines = []
     for p in range(1, 6):
