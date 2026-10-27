@@ -1,0 +1,11 @@
+[client]
+# Security: don't show stack traces (which can reveal internals) to end users.
+showErrorDetails = false
+toolbarMode = "minimal"
+
+[browser]
+# Privacy: don't send usage statistics to Streamlit.
+gatherUsageStats = false
+
+[server]
+enableXsrfProtection = true

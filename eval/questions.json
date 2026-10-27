@@ -1,0 +1,19 @@
+[
+  {"question": "paid time off", "expect": ["20 days of paid time off"]},
+  {"question": "remote and hybrid work", "expect": ["anchor days", "remote employees", "private workspace"]},
+  {"question": "remote work polocy", "expect": ["anchor days", "remote employees", "private workspace", "working abroad"]},
+  {"question": "What is the home-office equipment allowance?", "expect": ["36 months"]},
+  {"question": "Can I work from another country?", "expect": ["five consecutive business days"]},
+  {"question": "When do we get paid?", "expect": ["15th"]},
+  {"question": "When must expense reports be submitted?", "expect": ["30 calendar days"]},
+  {"question": "Do I need a receipt for a $30 taxi?", "expect": ["$25 or more"]},
+  {"question": "How many vendor quotes do I need for a large purchase?", "expect": ["three"]},
+  {"question": "Can I accept a gift from a supplier?", "expect": ["$100", "gift"]},
+  {"question": "What is the learning budget?", "expect": ["$1,200"]},
+  {"question": "What do I do if I lose my laptop?", "expect": ["service desk"]},
+  {"question": "How do I report harassment?", "expect": ["report", "harassment"]},
+  {"question": "What is the recovery time objective for tier 1 services?", "expect": ["4 hours"]},
+  {"question": "What is the capital of France?", "expect": []},
+  {"question": "Give me a recipe for chocolate cake", "expect": []},
+  {"question": "Who won the football world cup?", "expect": []}
+]
